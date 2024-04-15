@@ -1,19 +1,28 @@
 from pyautogui import screenshot, locate, center, locateCenterOnScreen
 from mouse import click, move
-from PIL import Image
+from PIL import Image, ImageGrab
 from keyboard import is_pressed
 from time import sleep
+import numpy as np
 import cv2
-target = Image.open(r"small_target.png")
+
 sleep(1)
 
-
+region = (830, 134, 240, 95)
 
 while not is_pressed("escape"):
     if is_pressed("p"):
         click(951, 166)
-        while is_pressed("p"):
-            pos = locate(target, screenshot(region=(829, 130, 245, 103)), grayscale=True, confidence=0)
+        i = 120
+        while i:
+            i -= 1
 
-            if pos:
-                click(pos.left + 829 + 5, pos.top + 142 + 5)
+            img = np.array(ImageGrab.grab().crop((region[0], region[1], region[2] + region[0], region[3] + region[1])))
+
+            pos = np.argwhere(img[:, :, -1] == 253)
+            #print(pos)
+
+            try:
+                click(pos[0][1] + 829 + 5, pos[0][0] + 142 + 5)
+            except:
+                pass

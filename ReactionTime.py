@@ -19,3 +19,4 @@ while True:
         fast_click()
         sleep(0.1)
         fast_click()
+

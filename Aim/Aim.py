@@ -8,7 +8,7 @@ target = Image.open(r"small_target.png")
 sleep(1)
 x, y = 0, 5
 
-region = (840, 134, 240-10, 95)
+region = (840, 134, 230, 95)
 
 while not is_pressed("escape"):
     if is_pressed("p"):
